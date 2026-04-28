@@ -1,0 +1,6 @@
+{
+    "virustotal_api_key": "YOUR_API_KEY_HERE",
+    "vt_enabled": true,
+    "confidence_threshold": 40,
+    "max_report_strings": 100
+}

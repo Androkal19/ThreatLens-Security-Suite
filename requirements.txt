@@ -1,0 +1,6 @@
+rich>=13.0.0
+pefile>=2023.2.7
+androguard>=3.3.5
+yara-python>=4.3.0
+requests>=2.31.0
+capstone>=5.0.0
