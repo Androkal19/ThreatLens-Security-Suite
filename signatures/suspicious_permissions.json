@@ -1,0 +1,216 @@
+{
+  "dangerous_permissions": {
+    "android.permission.SEND_SMS": {
+      "risk": "CRITICAL",
+      "score": 25,
+      "description": "Can send SMS messages without user knowledge, often used for premium rate fraud",
+      "legitimate_use": "SMS/messaging apps",
+      "malicious_use": "Premium SMS fraud, C2 communication via SMS"
+    },
+    "android.permission.RECEIVE_SMS": {
+      "risk": "CRITICAL",
+      "score": 25,
+      "description": "Can intercept incoming SMS messages including OTPs and 2FA codes",
+      "legitimate_use": "SMS/messaging apps, OTP auto-fill",
+      "malicious_use": "OTP/2FA interception, banking trojan functionality"
+    },
+    "android.permission.READ_SMS": {
+      "risk": "CRITICAL",
+      "score": 20,
+      "description": "Can read all SMS messages on the device",
+      "legitimate_use": "SMS backup apps",
+      "malicious_use": "Credential theft, OTP interception"
+    },
+    "android.permission.RECEIVE_BOOT_COMPLETED": {
+      "risk": "HIGH",
+      "score": 15,
+      "description": "App starts automatically when device boots",
+      "legitimate_use": "Alarm apps, system utilities",
+      "malicious_use": "Persistence mechanism for malware"
+    },
+    "android.permission.READ_CONTACTS": {
+      "risk": "HIGH",
+      "score": 15,
+      "description": "Can read all contacts on the device",
+      "legitimate_use": "Social apps, communication apps",
+      "malicious_use": "Contact harvesting for spam/phishing"
+    },
+    "android.permission.READ_CALL_LOG": {
+      "risk": "HIGH",
+      "score": 15,
+      "description": "Can read call history",
+      "legitimate_use": "Dialer apps, call management",
+      "malicious_use": "Surveillance, data exfiltration"
+    },
+    "android.permission.RECORD_AUDIO": {
+      "risk": "CRITICAL",
+      "score": 25,
+      "description": "Can record audio from microphone",
+      "legitimate_use": "Voice recorder, video calling apps",
+      "malicious_use": "Eavesdropping, audio surveillance"
+    },
+    "android.permission.CAMERA": {
+      "risk": "HIGH",
+      "score": 20,
+      "description": "Can access device camera",
+      "legitimate_use": "Camera apps, video calling",
+      "malicious_use": "Covert photo/video capture, surveillance"
+    },
+    "android.permission.ACCESS_FINE_LOCATION": {
+      "risk": "HIGH",
+      "score": 18,
+      "description": "Can access precise GPS location",
+      "legitimate_use": "Maps, navigation, fitness apps",
+      "malicious_use": "Location tracking, stalkerware"
+    },
+    "android.permission.ACCESS_COARSE_LOCATION": {
+      "risk": "MEDIUM",
+      "score": 10,
+      "description": "Can access approximate location",
+      "legitimate_use": "Weather apps, local news",
+      "malicious_use": "Approximate location tracking"
+    },
+    "android.permission.READ_PHONE_STATE": {
+      "risk": "HIGH",
+      "score": 15,
+      "description": "Can read phone number, IMEI, IMSI, and network info",
+      "legitimate_use": "Phone management apps",
+      "malicious_use": "Device fingerprinting, identity theft"
+    },
+    "android.permission.WRITE_EXTERNAL_STORAGE": {
+      "risk": "MEDIUM",
+      "score": 10,
+      "description": "Can write to external storage",
+      "legitimate_use": "File managers, download managers",
+      "malicious_use": "Data staging for exfiltration, dropping payloads"
+    },
+    "android.permission.READ_EXTERNAL_STORAGE": {
+      "risk": "MEDIUM",
+      "score": 10,
+      "description": "Can read external storage including photos and documents",
+      "legitimate_use": "Gallery apps, file managers",
+      "malicious_use": "Data theft, photo/document exfiltration"
+    },
+    "android.permission.INTERNET": {
+      "risk": "LOW",
+      "score": 5,
+      "description": "Can access the internet",
+      "legitimate_use": "Most apps require this",
+      "malicious_use": "Required for data exfiltration and C2 communication"
+    },
+    "android.permission.SYSTEM_ALERT_WINDOW": {
+      "risk": "CRITICAL",
+      "score": 25,
+      "description": "Can draw overlay windows on top of other apps",
+      "legitimate_use": "Chat bubbles, screen tools",
+      "malicious_use": "Overlay attacks, credential phishing, tapjacking"
+    },
+    "android.permission.BIND_ACCESSIBILITY_SERVICE": {
+      "risk": "CRITICAL",
+      "score": 30,
+      "description": "Can monitor and control all UI interactions",
+      "legitimate_use": "Accessibility tools for disabled users",
+      "malicious_use": "Keylogging, auto-granting permissions, click fraud"
+    },
+    "android.permission.BIND_DEVICE_ADMIN": {
+      "risk": "CRITICAL",
+      "score": 30,
+      "description": "Can become device administrator with elevated privileges",
+      "legitimate_use": "Enterprise MDM apps",
+      "malicious_use": "Preventing uninstallation, device lockout ransomware"
+    },
+    "android.permission.INSTALL_PACKAGES": {
+      "risk": "CRITICAL",
+      "score": 25,
+      "description": "Can install other APK packages silently",
+      "legitimate_use": "App stores, system updaters",
+      "malicious_use": "Dropping additional malware payloads"
+    },
+    "android.permission.REQUEST_INSTALL_PACKAGES": {
+      "risk": "HIGH",
+      "score": 20,
+      "description": "Can request to install APK packages",
+      "legitimate_use": "App stores",
+      "malicious_use": "Installing secondary malware"
+    },
+    "android.permission.CHANGE_WIFI_STATE": {
+      "risk": "MEDIUM",
+      "score": 10,
+      "description": "Can modify Wi-Fi connectivity state",
+      "legitimate_use": "Network management apps",
+      "malicious_use": "Forcing connections to attacker-controlled networks"
+    },
+    "android.permission.PROCESS_OUTGOING_CALLS": {
+      "risk": "HIGH",
+      "score": 18,
+      "description": "Can monitor and redirect outgoing calls",
+      "legitimate_use": "Call management, VoIP apps",
+      "malicious_use": "Call interception, toll fraud"
+    },
+    "android.permission.WAKE_LOCK": {
+      "risk": "LOW",
+      "score": 5,
+      "description": "Can prevent the device from sleeping",
+      "legitimate_use": "Media players, fitness trackers",
+      "malicious_use": "Keeping device awake for continuous surveillance"
+    },
+    "android.permission.DISABLE_KEYGUARD": {
+      "risk": "HIGH",
+      "score": 18,
+      "description": "Can disable the device lock screen",
+      "legitimate_use": "Alarm apps",
+      "malicious_use": "Bypassing device security"
+    },
+    "android.permission.GET_TASKS": {
+      "risk": "MEDIUM",
+      "score": 12,
+      "description": "Can get information about running tasks/apps",
+      "legitimate_use": "Task managers",
+      "malicious_use": "Detecting banking apps for overlay attacks"
+    }
+  },
+  "dangerous_combinations": [
+    {
+      "permissions": ["android.permission.INTERNET", "android.permission.READ_SMS", "android.permission.RECEIVE_SMS"],
+      "threat": "Banking Trojan / SMS Stealer",
+      "score": 35,
+      "description": "Classic banking trojan pattern: intercept SMS OTPs and exfiltrate over internet"
+    },
+    {
+      "permissions": ["android.permission.INTERNET", "android.permission.RECORD_AUDIO", "android.permission.CAMERA"],
+      "threat": "Spyware / RAT",
+      "score": 40,
+      "description": "Remote Access Trojan pattern: record audio/video and exfiltrate"
+    },
+    {
+      "permissions": ["android.permission.INTERNET", "android.permission.ACCESS_FINE_LOCATION", "android.permission.READ_CONTACTS"],
+      "threat": "Stalkerware",
+      "score": 30,
+      "description": "Stalkerware pattern: track location and harvest contacts"
+    },
+    {
+      "permissions": ["android.permission.SYSTEM_ALERT_WINDOW", "android.permission.BIND_ACCESSIBILITY_SERVICE"],
+      "threat": "Overlay Attack / Credential Stealer",
+      "score": 45,
+      "description": "Overlay attack pattern: draw fake login screens over banking apps"
+    },
+    {
+      "permissions": ["android.permission.BIND_DEVICE_ADMIN", "android.permission.INTERNET"],
+      "threat": "Ransomware / Device Locker",
+      "score": 40,
+      "description": "Ransomware pattern: lock device and communicate with C2"
+    },
+    {
+      "permissions": ["android.permission.INTERNET", "android.permission.SEND_SMS", "android.permission.READ_PHONE_STATE"],
+      "threat": "Premium SMS Fraud",
+      "score": 35,
+      "description": "Premium SMS fraud: send messages to premium numbers and hide evidence"
+    },
+    {
+      "permissions": ["android.permission.INSTALL_PACKAGES", "android.permission.INTERNET"],
+      "threat": "Dropper / Downloader",
+      "score": 35,
+      "description": "Dropper pattern: download and install additional malware payloads"
+    }
+  ]
+}

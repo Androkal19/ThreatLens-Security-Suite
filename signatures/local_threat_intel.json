@@ -1,0 +1,15 @@
+{
+    "malicious_hashes": [
+        "8bca2869f883f8c5406baea27309d82a9f24fe38a1beef9a102bb7ff63430cdf",
+        "8fec64be65d403f125e65a9c6808ddf421e0378b5d75c697745919938f3cef69",
+        "deadbeef"
+    ],
+    "malicious_urls": [
+        "https://zoxh-d6af9-default-rtdb.firebaseio.com",
+        "http://hacker.com"
+    ],
+    "malicious_domains": [
+        "zoxh-d6af9-default-rtdb.firebaseio.com"
+    ],
+    "malicious_ips": []
+}

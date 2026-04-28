@@ -1,0 +1,192 @@
+{
+  "categories": {
+    "process_injection": {
+      "description": "APIs used to inject code into other processes",
+      "risk": "CRITICAL",
+      "imports": {
+        "CreateRemoteThread": {"score": 30, "dll": "kernel32.dll", "description": "Creates a thread in another process - classic injection technique"},
+        "VirtualAllocEx": {"score": 25, "dll": "kernel32.dll", "description": "Allocates memory in another process for code injection"},
+        "WriteProcessMemory": {"score": 25, "dll": "kernel32.dll", "description": "Writes data to another process memory space"},
+        "NtCreateThreadEx": {"score": 30, "dll": "ntdll.dll", "description": "Low-level thread creation in another process"},
+        "RtlCreateUserThread": {"score": 30, "dll": "ntdll.dll", "description": "Creates user thread in target process"},
+        "QueueUserAPC": {"score": 25, "dll": "kernel32.dll", "description": "APC injection technique"},
+        "NtQueueApcThread": {"score": 28, "dll": "ntdll.dll", "description": "Low-level APC injection"},
+        "SetThreadContext": {"score": 25, "dll": "kernel32.dll", "description": "Modifies thread context for thread hijacking"}
+      }
+    },
+    "networking": {
+      "description": "Network communication APIs used for C2 and data exfiltration",
+      "risk": "HIGH",
+      "imports": {
+        "WSAStartup": {"score": 10, "dll": "ws2_32.dll", "description": "Initializes Winsock - network communication"},
+        "socket": {"score": 10, "dll": "ws2_32.dll", "description": "Creates a network socket"},
+        "connect": {"score": 15, "dll": "ws2_32.dll", "description": "Connects to a remote server"},
+        "send": {"score": 12, "dll": "ws2_32.dll", "description": "Sends data over network"},
+        "recv": {"score": 12, "dll": "ws2_32.dll", "description": "Receives data from network"},
+        "InternetOpenA": {"score": 12, "dll": "wininet.dll", "description": "Opens internet session"},
+        "InternetOpenW": {"score": 12, "dll": "wininet.dll", "description": "Opens internet session (Unicode)"},
+        "InternetConnectA": {"score": 15, "dll": "wininet.dll", "description": "Connects to specific server"},
+        "InternetConnectW": {"score": 15, "dll": "wininet.dll", "description": "Connects to specific server (Unicode)"},
+        "HttpOpenRequestA": {"score": 15, "dll": "wininet.dll", "description": "Creates HTTP request handle"},
+        "HttpSendRequestA": {"score": 15, "dll": "wininet.dll", "description": "Sends HTTP request"},
+        "InternetReadFile": {"score": 12, "dll": "wininet.dll", "description": "Reads data from internet"},
+        "URLDownloadToFileA": {"score": 20, "dll": "urlmon.dll", "description": "Downloads file from URL - common dropper technique"},
+        "URLDownloadToFileW": {"score": 20, "dll": "urlmon.dll", "description": "Downloads file from URL (Unicode)"},
+        "WinHttpOpen": {"score": 12, "dll": "winhttp.dll", "description": "Opens WinHTTP session"},
+        "WinHttpConnect": {"score": 15, "dll": "winhttp.dll", "description": "Connects via WinHTTP"},
+        "WinHttpSendRequest": {"score": 15, "dll": "winhttp.dll", "description": "Sends WinHTTP request"},
+        "DnsQuery_A": {"score": 10, "dll": "dnsapi.dll", "description": "DNS query - may be used for DNS tunneling"}
+      }
+    },
+    "keylogging": {
+      "description": "APIs used for keyboard monitoring and keylogging",
+      "risk": "CRITICAL",
+      "imports": {
+        "SetWindowsHookExA": {"score": 25, "dll": "user32.dll", "description": "Installs hook procedure - used for keylogging"},
+        "SetWindowsHookExW": {"score": 25, "dll": "user32.dll", "description": "Installs hook procedure (Unicode)"},
+        "GetAsyncKeyState": {"score": 20, "dll": "user32.dll", "description": "Checks key state - polling-based keylogger"},
+        "GetKeyState": {"score": 15, "dll": "user32.dll", "description": "Gets key state"},
+        "GetKeyboardState": {"score": 18, "dll": "user32.dll", "description": "Gets all key states - keylogger indicator"},
+        "MapVirtualKeyA": {"score": 10, "dll": "user32.dll", "description": "Translates virtual key codes"}
+      }
+    },
+    "anti_debugging": {
+      "description": "APIs used to detect and evade analysis/debugging",
+      "risk": "HIGH",
+      "imports": {
+        "IsDebuggerPresent": {"score": 20, "dll": "kernel32.dll", "description": "Checks if process is being debugged"},
+        "CheckRemoteDebuggerPresent": {"score": 22, "dll": "kernel32.dll", "description": "Checks for remote debugger"},
+        "NtQueryInformationProcess": {"score": 18, "dll": "ntdll.dll", "description": "Can detect debugging via ProcessDebugPort"},
+        "OutputDebugStringA": {"score": 8, "dll": "kernel32.dll", "description": "May be used for anti-debug timing checks"},
+        "GetTickCount": {"score": 5, "dll": "kernel32.dll", "description": "Timing check - anti-debug/anti-sandbox"},
+        "QueryPerformanceCounter": {"score": 5, "dll": "kernel32.dll", "description": "High-res timing - anti-debug"},
+        "NtSetInformationThread": {"score": 20, "dll": "ntdll.dll", "description": "Can hide thread from debugger"}
+      }
+    },
+    "persistence": {
+      "description": "APIs used to establish persistence on the system",
+      "risk": "HIGH",
+      "imports": {
+        "RegSetValueExA": {"score": 15, "dll": "advapi32.dll", "description": "Sets registry value - persistence via Run keys"},
+        "RegSetValueExW": {"score": 15, "dll": "advapi32.dll", "description": "Sets registry value (Unicode)"},
+        "RegCreateKeyExA": {"score": 12, "dll": "advapi32.dll", "description": "Creates registry key"},
+        "RegCreateKeyExW": {"score": 12, "dll": "advapi32.dll", "description": "Creates registry key (Unicode)"},
+        "CreateServiceA": {"score": 20, "dll": "advapi32.dll", "description": "Creates a Windows service for persistence"},
+        "CreateServiceW": {"score": 20, "dll": "advapi32.dll", "description": "Creates a Windows service (Unicode)"},
+        "StartServiceA": {"score": 15, "dll": "advapi32.dll", "description": "Starts a service"}
+      }
+    },
+    "privilege_escalation": {
+      "description": "APIs used to escalate privileges",
+      "risk": "CRITICAL",
+      "imports": {
+        "AdjustTokenPrivileges": {"score": 22, "dll": "advapi32.dll", "description": "Modifies process token privileges"},
+        "OpenProcessToken": {"score": 15, "dll": "advapi32.dll", "description": "Opens process token for manipulation"},
+        "LookupPrivilegeValueA": {"score": 12, "dll": "advapi32.dll", "description": "Looks up privilege value - precursor to escalation"},
+        "ImpersonateLoggedOnUser": {"score": 25, "dll": "advapi32.dll", "description": "Impersonates another user's security context"},
+        "DuplicateTokenEx": {"score": 20, "dll": "advapi32.dll", "description": "Duplicates access token"}
+      }
+    },
+    "file_operations": {
+      "description": "Suspicious file operation APIs",
+      "risk": "MEDIUM",
+      "imports": {
+        "DeleteFileA": {"score": 8, "dll": "kernel32.dll", "description": "Deletes files - may be used for anti-forensics"},
+        "MoveFileExA": {"score": 8, "dll": "kernel32.dll", "description": "Moves/renames files"},
+        "CopyFileA": {"score": 5, "dll": "kernel32.dll", "description": "Copies files - self-replication"},
+        "CreateFileA": {"score": 3, "dll": "kernel32.dll", "description": "Creates or opens files"},
+        "WriteFile": {"score": 5, "dll": "kernel32.dll", "description": "Writes data to file"},
+        "GetTempPathA": {"score": 8, "dll": "kernel32.dll", "description": "Gets temp directory - common malware staging area"},
+        "GetTempFileNameA": {"score": 8, "dll": "kernel32.dll", "description": "Creates temp filename"}
+      }
+    },
+    "process_manipulation": {
+      "description": "APIs for creating and manipulating processes",
+      "risk": "HIGH",
+      "imports": {
+        "CreateProcessA": {"score": 12, "dll": "kernel32.dll", "description": "Creates a new process"},
+        "CreateProcessW": {"score": 12, "dll": "kernel32.dll", "description": "Creates a new process (Unicode)"},
+        "OpenProcess": {"score": 15, "dll": "kernel32.dll", "description": "Opens handle to another process"},
+        "TerminateProcess": {"score": 12, "dll": "kernel32.dll", "description": "Terminates a process"},
+        "ShellExecuteA": {"score": 10, "dll": "shell32.dll", "description": "Executes program/opens file"},
+        "ShellExecuteExA": {"score": 12, "dll": "shell32.dll", "description": "Extended shell execute"},
+        "WinExec": {"score": 15, "dll": "kernel32.dll", "description": "Executes a command - legacy but still used by malware"}
+      }
+    },
+    "crypto": {
+      "description": "Cryptographic APIs that may indicate ransomware or data encryption",
+      "risk": "MEDIUM",
+      "imports": {
+        "CryptEncrypt": {"score": 15, "dll": "advapi32.dll", "description": "Encrypts data - potential ransomware indicator"},
+        "CryptDecrypt": {"score": 10, "dll": "advapi32.dll", "description": "Decrypts data"},
+        "CryptGenKey": {"score": 12, "dll": "advapi32.dll", "description": "Generates encryption key"},
+        "CryptImportKey": {"score": 12, "dll": "advapi32.dll", "description": "Imports encryption key"},
+        "CryptAcquireContextA": {"score": 8, "dll": "advapi32.dll", "description": "Acquires crypto provider context"},
+        "CryptCreateHash": {"score": 5, "dll": "advapi32.dll", "description": "Creates hash object"},
+        "BCryptEncrypt": {"score": 15, "dll": "bcrypt.dll", "description": "Modern encryption API - potential ransomware"}
+      }
+    },
+    "screen_capture": {
+      "description": "APIs for capturing screen content",
+      "risk": "HIGH",
+      "imports": {
+        "BitBlt": {"score": 18, "dll": "gdi32.dll", "description": "Bit block transfer - used for screen capture"},
+        "GetDC": {"score": 10, "dll": "user32.dll", "description": "Gets device context - precursor to screen capture"},
+        "GetDesktopWindow": {"score": 10, "dll": "user32.dll", "description": "Gets desktop window handle"},
+        "CreateCompatibleBitmap": {"score": 8, "dll": "gdi32.dll", "description": "Creates bitmap for screen capture"},
+        "GetForegroundWindow": {"score": 8, "dll": "user32.dll", "description": "Gets active window - targeting specific apps"},
+        "GetWindowTextA": {"score": 5, "dll": "user32.dll", "description": "Gets window title text"}
+      }
+    }
+  },
+  "dangerous_combinations": [
+    {
+      "imports": ["VirtualAllocEx", "WriteProcessMemory", "CreateRemoteThread"],
+      "technique": "Classic DLL/Code Injection",
+      "score": 45,
+      "mitre": "T1055.001"
+    },
+    {
+      "imports": ["SetWindowsHookExA", "GetAsyncKeyState", "GetKeyboardState"],
+      "technique": "Keylogger",
+      "score": 40,
+      "mitre": "T1056.001"
+    },
+    {
+      "imports": ["CryptEncrypt", "CryptGenKey", "FindFirstFileA"],
+      "technique": "Ransomware File Encryption",
+      "score": 45,
+      "mitre": "T1486"
+    },
+    {
+      "imports": ["URLDownloadToFileA", "ShellExecuteA", "CreateProcessA"],
+      "technique": "Dropper / Downloader",
+      "score": 35,
+      "mitre": "T1105"
+    },
+    {
+      "imports": ["RegSetValueExA", "RegCreateKeyExA", "CreateServiceA"],
+      "technique": "Persistence Mechanism",
+      "score": 30,
+      "mitre": "T1547.001"
+    },
+    {
+      "imports": ["BitBlt", "GetDC", "GetDesktopWindow"],
+      "technique": "Screen Capture",
+      "score": 30,
+      "mitre": "T1113"
+    },
+    {
+      "imports": ["connect", "send", "recv", "WSAStartup"],
+      "technique": "Raw Socket C2 Communication",
+      "score": 25,
+      "mitre": "T1095"
+    },
+    {
+      "imports": ["AdjustTokenPrivileges", "OpenProcessToken", "ImpersonateLoggedOnUser"],
+      "technique": "Privilege Escalation",
+      "score": 40,
+      "mitre": "T1134"
+    }
+  ]
+}
